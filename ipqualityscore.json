@@ -396,8 +396,8 @@
                 },
                 {
                     "data_path": "summary.total_objects_successful",
-					"data_type": "numeric",
-					"example_values": [
+                    "data_type": "numeric",
+                    "example_values": [
                         1
                     ]
                 }
@@ -634,7 +634,7 @@
                     ],
                     "column_order": 2
                 },
-				{
+                {
                     "data_path": "action_result.summary.Message",
                     "data_type": "string",
                     "example_values": [
@@ -1080,8 +1080,8 @@
                         "linux"
                     ],
                     "column_order": 40
-				},
-				{
+                },
+                {
                     "data_path": "action_result.status",
                     "data_type": "string",
                     "example_values": [
@@ -1090,7 +1090,7 @@
                     ],
                     "column_order": 2
                 },
-				{
+                {
                     "data_path": "action_result.summary.Message",
                     "data_type": "string",
                     "example_values": [
@@ -1135,5 +1135,33 @@
             },
             "versions": "EQ(*)"
         }
-    ]
+    ],
+    "pip_dependencies": {
+        "wheel": [
+            {
+                "module": "certifi",
+                "input_file": "wheels/certifi-2021.10.8-py2.py3-none-any.whl"
+            },
+            {
+                "module": "chardet",
+                "input_file": "wheels/chardet-3.0.4-py2.py3-none-any.whl"
+            },
+            {
+                "module": "idna",
+                "input_file": "wheels/idna-2.10-py2.py3-none-any.whl"
+            },
+            {
+                "module": "requests",
+                "input_file": "wheels/requests-2.25.0-py2.py3-none-any.whl"
+            },
+            {
+                "module": "simplejson",
+                "input_file": "wheels/simplejson-3.17.2-cp36-cp36m-manylinux2010_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+            },
+            {
+                "module": "urllib3",
+                "input_file": "wheels/urllib3-1.26.7-py2.py3-none-any.whl"
+            }
+        ]
+    }
 }
