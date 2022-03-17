@@ -2,11 +2,11 @@
 # IPQualityScore
 
 Publisher: IPQualityScore  
-Connector Version: 1\.0\.1  
+Connector Version: 1\.0\.2  
 Product Vendor: IPQualityScore  
 Product Name: IPQualityScore  
 Product Version Supported (regex): "\.\*"  
-Minimum Product Version: 4\.9\.39220  
+Minimum Product Version: 5\.1\.0  
 
 This app implements IP, URL and Email investigative capabilities utilizing IPQualityScore
 
