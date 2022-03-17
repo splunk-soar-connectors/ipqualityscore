@@ -2,18 +2,18 @@
 #
 # Licensed under Apache 2.0 (https://www.apache.org/licenses/LICENSE-2.0.txt)
 
+import urllib.parse
+
 # Phantom imports
 import phantom.app as phantom
-from phantom.base_connector import BaseConnector
+import requests
+# Global imports
+import simplejson as json
 from phantom.action_result import ActionResult
+from phantom.base_connector import BaseConnector
 
 # Local imports
 from ipqualityscore_consts import *
-
-# Global imports
-import simplejson as json
-import requests
-import urllib.parse
 
 
 class IpqualityscoreConnector(BaseConnector):
@@ -372,6 +372,7 @@ class IpqualityscoreConnector(BaseConnector):
 
 if __name__ == '__main__':
     import sys
+
     import pudb
     pudb.set_trace()
     if len(sys.argv) < 2:
