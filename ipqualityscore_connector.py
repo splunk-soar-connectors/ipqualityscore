@@ -2,18 +2,18 @@
 #
 # Licensed under Apache 2.0 (https://www.apache.org/licenses/LICENSE-2.0.txt)
 
+import urllib.parse
+
 # Phantom imports
 import phantom.app as phantom
-from phantom.base_connector import BaseConnector
+import requests
+# Global imports
+import simplejson as json
 from phantom.action_result import ActionResult
+from phantom.base_connector import BaseConnector
 
 # Local imports
 from ipqualityscore_consts import *
-
-# Global imports
-import simplejson as json
-import requests
-import urllib.parse
 
 
 class IpqualityscoreConnector(BaseConnector):
@@ -86,7 +86,7 @@ class IpqualityscoreConnector(BaseConnector):
         app_key = config['apikey']
         self.save_progress(IPQUALITYSCORE_MSG_CONNECTING)
         try:
-            response = requests.get(
+            response = requests.get(  # nosemgrep: python.requests.best-practice.use-timeout.use-timeout
                 IPQUALITYSCORE_API_TEST.format(apikey=app_key))
         except Exception as e:
             err = self._get_error_message_from_exception(e)
@@ -166,7 +166,7 @@ class IpqualityscoreConnector(BaseConnector):
                         query_url=param['url'])
         try:
             req_url = self.create_req_url('url', param, app_key)
-            query_res = requests.get(req_url)
+            query_res = requests.get(req_url)  # nosemgrep: python.requests.best-practice.use-timeout.use-timeout
         except Exception as e:
             err = self._get_error_message_from_exception(e)
             self.debug_print('check_url: {}'.format(err))
@@ -240,7 +240,7 @@ class IpqualityscoreConnector(BaseConnector):
                             query_ip=param['ip'])
         try:
             req_url = self.create_req_url('ip', param, app_key)
-            query_res = requests.get(req_url)
+            query_res = requests.get(req_url)  # nosemgrep: python.requests.best-practice.use-timeout.use-timeout
         except Exception as e:
             err = self._get_error_message_from_exception(e)
             self.debug_print('ip_reputation: {}'.format(err))
@@ -316,7 +316,7 @@ class IpqualityscoreConnector(BaseConnector):
                             query_ip=param['email'])
         try:
             req_url = self.create_req_url('email', param, app_key)
-            query_res = requests.get(req_url)
+            query_res = requests.get(req_url)  # nosemgrep: python.requests.best-practice.use-timeout.use-timeout
         except Exception as e:
             err = self._get_error_message_from_exception(e)
             self.debug_print('ip_reputation: {}'.format(err))
@@ -372,11 +372,12 @@ class IpqualityscoreConnector(BaseConnector):
 
 if __name__ == '__main__':
     import sys
+
     import pudb
     pudb.set_trace()
     if len(sys.argv) < 2:
         print('No test json specified as input')
-        exit(0)
+        sys.exit(0)
     with open(sys.argv[1]) as f:
         in_json = f.read()
         in_json = json.loads(in_json)
@@ -385,4 +386,4 @@ if __name__ == '__main__':
         connector.print_progress_message = True
         ret_val = connector._handle_action(json.dumps(in_json), None)
         print(json.dumps(json.loads(ret_val), indent=4))
-    exit(0)
+    sys.exit(0)
