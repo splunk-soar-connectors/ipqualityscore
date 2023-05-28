@@ -193,10 +193,14 @@ class IpqualityscoreConnector(BaseConnector):
                 phantom.APP_ERROR,
                 'Response from server is not a valid JSON')
 
-        if 'status_code' in result and result['status_code'] == 200:
-            status = result['message']
-            action_result.append_to_message(
-                IPQUALITYSCORE_SERVICE_SUCC_MSG)
+        if 'status_code' in result:
+            if result['status_code'] == 200:
+                status = result['message']
+                action_result.append_to_message(
+                    IPQUALITYSCORE_SERVICE_SUCC_MSG)
+            else:
+                status = result['message']
+                action_result.append_to_message("URL is unreachable")
         else:
             return action_result.set_status(
                 phantom.APP_ERROR,
