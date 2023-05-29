@@ -85,7 +85,7 @@ class IpqualityscoreConnector(BaseConnector):
     def test_asset_connectivity(self, param):
         config = self.get_config()
         app_key = config['apikey']
-        self.save_progress(IPQUALITYSCORE_MESSAGE_CONNECTING)
+        self.save_progress(IPQUALITYSCORE_MESSAGE_CONNECTIVITY)
         try:
             response = requests.get(  # nosemgrep: python.requests.best-practice.use-timeout.use-timeout
                 IPQUALITYSCORE_API_TEST.format(apikey=app_key))
@@ -93,7 +93,7 @@ class IpqualityscoreConnector(BaseConnector):
             err = self._get_error_message_from_exception(e)
             self.debug_print('test_asset_connectivity: {}'.format(err))
             err_msg = '{}. {}. Error Occurred: {}'.format(IPQUALITYSCORE_ERROR_CONNECTIVITY_TEST,
-                                                          IPQUALITYSCORE_MSG_CHECK_CONNECTIVITY, err)
+                                                          IPQUALITYSCORE_MESSAGE_CHECK_CONNECTIVITY, err)
             return self.set_status(phantom.APP_ERROR, err_msg)
 
         if response.status_code == 509:
@@ -101,9 +101,9 @@ class IpqualityscoreConnector(BaseConnector):
             self.save_progress(IPQUALITYSCORE_ERROR_CONNECTIVITY_TEST)
             return self.set_status(phantom.APP_ERROR)
         if response.status_code != 200:
-            self.save_progress('{}. {}'.format(IPQUALITYSCORE_SERVER_RETURNED_ERR_CODE.
+            self.save_progress('{}. {}'.format(IPQUALITYSCORE_SERVER_RETURNED_ERROR_CODE.
                                                format(code=response.status_code),
-                                               IPQUALITYSCORE_MSG_CHECK_CONNECTIVITY))
+                                               IPQUALITYSCORE_MESSAGE_CHECK_CONNECTIVITY))
             self.save_progress(IPQUALITYSCORE_ERROR_CONNECTIVITY_TEST)
             return self.set_status(phantom.APP_ERROR)
 
@@ -172,7 +172,7 @@ class IpqualityscoreConnector(BaseConnector):
         except Exception as e:
             err = self._get_error_message_from_exception(e)
             self.debug_print('check_url: {}'.format(err))
-            return action_result.set_status(phantom.APP_ERROR, '{}{}'.format(IPQUALITYSCORE_SERVER_CONNECTION_ERR, err))
+            return action_result.set_status(phantom.APP_ERROR, '{}{}'.format(IPQUALITYSCORE_SERVER_CONNECTIVITY_ERROR, err))
 
         action_result.add_debug_data({'response_text': query_res.text if query_res else ''})
         self.debug_print('status_code {}'.format(query_res.status_code))
@@ -183,7 +183,7 @@ class IpqualityscoreConnector(BaseConnector):
         if query_res.status_code != 200:
             return action_result.set_status(
                 phantom.APP_ERROR,
-                IPQUALITYSCORE_SERVER_RETURNED_ERR_CODE.
+                IPQUALITYSCORE_SERVER_RETURNED_ERROR_CODE.
                 format(code=query_res.status_code))
         try:
             result = query_res.json()
@@ -204,7 +204,7 @@ class IpqualityscoreConnector(BaseConnector):
         else:
             return action_result.set_status(
                 phantom.APP_ERROR,
-                IPQUALITYSCORE_ERR_MSG_OBJECT_QUERIED)
+                IPQUALITYSCORE_ERROR_MESSAGE_OBJECT_QUERIED)
 
         try:
             status_summary = {}
@@ -249,7 +249,7 @@ class IpqualityscoreConnector(BaseConnector):
         except Exception as e:
             err = self._get_error_message_from_exception(e)
             self.debug_print('ip_reputation: {}'.format(err))
-            return action_result.set_status(phantom.APP_ERROR, '{}{}'.format(IPQUALITYSCORE_SERVER_CONNECTION_ERR, err))
+            return action_result.set_status(phantom.APP_ERROR, '{}{}'.format(IPQUALITYSCORE_SERVER_CONNECTIVITY_ERROR, err))
 
         action_result.add_debug_data({'response_text': query_res.text if query_res else ''})
         self.debug_print('status_code {}'.format(query_res.status_code))
@@ -258,7 +258,7 @@ class IpqualityscoreConnector(BaseConnector):
                 phantom.APP_ERROR, IPQUALITYSCORE_SERVER_ERROR_RATE_LIMIT)
         if query_res.status_code != 200:
             return action_result.set_status(
-                phantom.APP_ERROR, IPQUALITYSCORE_SERVER_RETURNED_ERR_CODE.
+                phantom.APP_ERROR, IPQUALITYSCORE_SERVER_RETURNED_ERROR_CODE.
                 format(code=query_res.status_code))
         try:
             result = query_res.json()
@@ -276,7 +276,7 @@ class IpqualityscoreConnector(BaseConnector):
         else:
             return action_result.set_status(
                 phantom.APP_ERROR,
-                IPQUALITYSCORE_ERR_MSG_OBJECT_QUERIED)
+                IPQUALITYSCORE_ERROR_MESSAGE_OBJECT_QUERIED)
 
         try:
             status_summary = {}
@@ -324,7 +324,7 @@ class IpqualityscoreConnector(BaseConnector):
         except Exception as e:
             err = self._get_error_message_from_exception(e)
             self.debug_print('ip_reputation: {}'.format(err))
-            return action_result.set_status(phantom.APP_ERROR, '{}{}'.format(IPQUALITYSCORE_SERVER_CONNECTION_ERR, err))
+            return action_result.set_status(phantom.APP_ERROR, '{}{}'.format(IPQUALITYSCORE_SERVER_CONNECTIVITY_ERROR, err))
 
         action_result.add_debug_data({'response_text': query_res.text if query_res else ''})
         self.debug_print('status_code {}'.format(query_res.status_code))
@@ -335,7 +335,7 @@ class IpqualityscoreConnector(BaseConnector):
         if query_res.status_code != 200:
             return action_result.set_status(
                 phantom.APP_ERROR,
-                IPQUALITYSCORE_SERVER_RETURNED_ERR_CODE.
+                IPQUALITYSCORE_SERVER_RETURNED_ERROR_CODE.
                 format(code=query_res.status_code))
         try:
             result = query_res.json()
@@ -353,7 +353,7 @@ class IpqualityscoreConnector(BaseConnector):
         else:
             return action_result.set_status(
                 phantom.APP_ERROR,
-                IPQUALITYSCORE_ERR_MSG_OBJECT_QUERIED)
+                IPQUALITYSCORE_ERROR_MESSAGE_OBJECT_QUERIED)
         try:
             status_summary = {}
             if result['success'] is True:
