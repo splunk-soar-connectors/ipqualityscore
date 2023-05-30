@@ -7,13 +7,14 @@
     "type": "investigative",
     "license": "Copyright (c) 2021-2023 IPQualityScore.com",
     "main_module": "ipqualityscore_connector.py",
-    "app_version": "1.0.3",
+    "app_version": "1.1.0",
     "utctime_updated": "2022-01-07T22:31:24.000000Z",
     "product_vendor": "IPQualityScore",
     "product_name": "IPQualityScore",
     "product_version_regex": ".*",
     "min_phantom_version": "6.0.0",
     "python_version": "3",
+    "fips_compliant": false,
     "latest_tested_versions": [
         "Cloud, API: ipqualityscore.com, February 25 2021"
     ],
