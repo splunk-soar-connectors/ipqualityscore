@@ -98,8 +98,8 @@ class IpqualityscoreConnector(BaseConnector):
         app_key = config['apikey']
         self.save_progress(IPQUALITYSCORE_MESSAGE_CONNECTIVITY)
         try:
-            response = requests.get(  # nosemgrep: python.requests.best-practice.use-timeout.use-timeout
-                IPQUALITYSCORE_API_TEST.format(apikey=app_key))
+            response = requests.get(IPQUALITYSCORE_API_TEST.format(apikey=app_key))  # nosemgrep
+            # python.requests.best-practice.use-timeout.use-timeout
         except Exception as e:
             err = self._get_error_message_from_exception(e)
             self.debug_print('test_asset_connectivity: {}'.format(err))
