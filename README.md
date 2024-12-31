@@ -2,7 +2,7 @@
 # IPQualityScore
 
 Publisher: IPQualityScore  
-Connector Version: 1.1.0  
+Connector Version: 1.2.0  
 Product Vendor: IPQualityScore  
 Product Name: IPQualityScore  
 Product Version Supported (regex): ".\*"  
@@ -21,7 +21,9 @@ VARIABLE | REQUIRED | TYPE | DESCRIPTION
 [test connectivity](#action-test-connectivity) - Validates the connectivity by querying IPQualityScore  
 [email validation](#action-email-validation) - Queries IPQualityScore's Email Validation API  
 [url checker](#action-url-checker) - Queries IPQualityScore's malicious URL scanner API  
-[ip reputation](#action-ip-reputation) - Queries IPQualityScore's Proxy and VPN detection API  
+[ip reputation](#action-ip-reputation) - Queries IPQualityScore's Proxy and VPN detection API
+[phone validation](#action-phone-validation) - Queries IPQualityScore's Phone Validation API
+[dark web leak](#action-dark-web-leak) - Queries IPQualityScore's Dark Web Leak API
 
 ## action: 'test connectivity'
 Validates the connectivity by querying IPQualityScore
@@ -142,7 +144,7 @@ Queries IPQualityScore's Proxy and VPN detection API
 Type: **investigate**  
 Read only: **True**
 
-If URL information is unavailable in IPQualityScore, only 'message' and 'status_code' properties would be populated. The 'strictness' is an optional parameter to perform (higher number) or ignore (lower number) of additional intelligence checks. The possible values for 'strictness' are 0,1 and 2.
+If IP information is unavailable in IPQualityScore, only 'message' and 'status_code' properties would be populated. The 'strictness' is an optional parameter to perform (higher number) or ignore (lower number) of additional intelligence checks. The possible values for 'strictness' are 0,1 and 2.
 
 #### Action Parameters
 PARAMETER | REQUIRED | DESCRIPTION | TYPE | CONTAINS
@@ -203,3 +205,97 @@ action_result.summary.Status_Code | numeric |  |   400
 action_result.message | string |  |   api request completed 
 summary.total_objects | numeric |  |   1 
 summary.total_objects_successful | numeric |  |   1 
+
+## action: 'phone validation'
+Queries IPQualityScore's Phone Validation API
+
+Type: **investigate**  
+Read only: **True**
+
+If Phone information is unavailable in IPQualityScore, only few properties would be populated.
+
+#### Action Parameters
+PARAMETER | REQUIRED | DESCRIPTION | TYPE | CONTAINS  
+--------- | -------- | ----------- | ---- | --------  
+**phone** | required | Phone Number you want to fetch reputation data | numeric | `phone number`, `phone`  
+**strictness** | optional | How in depth (strict) do you want this reputation check to be? Stricter checks may provide a higher false-positive rate. We recommend starting at "0", the lowest strictness setting, and increasing to "1" or "2" depending on your levels of fraud | numeric |  
+**country** | optional | You can optionally provide us with the default country or countries (comma separated) this phone number is suspected to be associated with. Our system will prefer to use a country on this list for verification or will require a country to be specified in the event the phone number is less than 10 digits | string | 
+
+#### Action Output
+DATA PATH | TYPE | CONTAINS | EXAMPLE VALUES  
+--------- | ---- | -------- | --------------  
+action_result.parameter.phone | numeric | phone number, phone |  9877653535
+action_result.parameter.strictness | numeric |  |  1
+action_result.parameter.country | string |  |  IN
+action_result.status | string |  |  success failed
+action_result.data.\*.message | string |  | Phone is valid.  
+action_result.message | string |  | api request completed  
+action_result.data.\*.success | boolean |  | True False  
+action_result.data.\*.formatted | string |  | +918886686866  
+action_result.data.\*.local_format | string |  | 088866 86866  
+action_result.data.\*.valid | boolean |  | True  
+action_result.data.\*.fraud_score | numeric |  | 0  
+action_result.data.\*.recent_abuse | boolean |  | False  
+action_result.data.\*.VOIP | boolean |  | False  
+action_result.data.\*.prepaid | boolean |  | False  
+action_result.data.\*.risky | boolean |  | False  
+action_result.data.\*.active | boolean |  | True  
+action_result.data.\*.carrier | string |  | Aircel  
+action_result.data.\*.line_type | string |  | Wireless  
+action_result.data.\*.country | string |  | IN  
+action_result.data.\*.city | string |  | Madhya Pradesh  
+action_result.data.\*.zip_code | string |  | N/A  
+action_result.data.\*.region | string |  | India  
+action_result.data.\*.dialing_code | numeric |  | 91  
+action_result.data.\*.active_status | string |  | N/A  
+action_result.data.\*.sms_domain | string |  | aircel.co.in  
+action_result.data.\*.associated_email_addresses.status | string |  | No associated emails found.  
+action_result.data.\*.associated_email_addresses.emails | string |  | xuz@test.com  
+action_result.data.\*.user_activity | string |  | Disabled for performance. Contact support for further assistance.  
+action_result.data.\*.mnc | string |  | 801  
+action_result.data.\*.mcc | string |  | 405  
+action_result.data.\*.leaked | boolean |  | False  
+action_result.data.\*.spammer | boolean |  | False  
+action_result.data.\*.request_id | string |  | TbA02W8E1S  
+action_result.data.\*.name | string |  | N/A  
+action_result.data.\*.timezone | string |  | Asia/Kolkata  
+action_result.data.\*.do_not_call | boolean |  | False  
+action_result.data.\*.accurate_country_code | boolean |  | False  
+action_result.data.\*.sms_email | string |  | 08886686866@aircel.co.in  
+summary.total_objects | numeric |  | 1  
+summary.total_objects_successful | numeric |  | 1  
+
+## action: 'dark web leak'
+Queries IPQualityScore's Dark Web Leak API
+
+Type: **investigate**  
+Read only: **True**
+
+If dark web leak information is unavailable in IPQualityScore, only few properties would be populated.
+
+#### Action Parameters
+PARAMETER | REQUIRED | DESCRIPTION | TYPE | CONTAINS  
+--------- | -------- | ----------- | ---- | --------  
+**type** | required | Type of data you are submitting | string | `email`, `password`, `username`  
+**value** | required | Indicator Value of the type | string |  
+
+
+
+#### Action Output
+DATA PATH | TYPE | CONTAINS | EXAMPLE VALUES  
+--------- | ---- | -------- | --------------  
+action_result.parameter.type | string |  |  email
+action_result.parameter.value | string |  |  moen@test.com
+action_result.status | string |  |  success failed
+action_result.data.\*.message | string |  | Success  
+action_result.data.\*.success | boolean |  | True False  
+action_result.data.\*.request_hash | string |  | 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161  
+action_result.data.\*.source | string |  | Exploit Antipublic  
+action_result.data.\*.exposed | boolean |  | True False  
+action_result.data.\*.first_seen.human | string |  | 2 years ago  
+action_result.data.\*.plain_text_password | boolean |  | True False  
+action_result.data.\*.request_id | string |  | CosqSQLZsx  
+action_result.message | string |  |  api request completed
+summary.total_objects | numeric |  |  1
+summary.total_objects_successful | numeric |  |  1
+

@@ -19,6 +19,8 @@ IPQUALITYSCORE_API_TEST = 'https://ipqualityscore.com/api/json/ip/{apikey}/8.8.8
 IPQUALITYSCORE_API_URL_CHECKER = 'https://ipqualityscore.com/api/json/url/{apikey}/{url}'
 IPQUALITYSCORE_API_IP_REPUTATION = 'https://ipqualityscore.com/api/json/ip/{apikey}/{ip}'
 IPQUALITYSCORE_API_EMAIL_VALIDATION = 'https://ipqualityscore.com/api/json/email/{apikey}/{email}'
+IPQUALITYSCORE_API_PHONE_VALIDATION = 'https://ipqualityscore.com/api/json/phone/{apikey}/{phone}'
+IPQUALITYSCORE_API_DARKWEBLEAK = 'https://ipqualityscore.com/api/json/leaked/{type}/{apikey}/{data}'
 
 IPQUALITYSCORE_APP_KEY = 'app_key'
 IPQUALITYSCORE_MESSAGE_QUERY_URL = 'Querying URL: {query_url}'
@@ -40,6 +42,8 @@ IPQUALITYSCORE_SERVER_ERROR_RATE_LIMIT = 'Query is being rate limited. \
 ACTION_ID_URL_CHECKER = 'check_url'
 ACTION_ID_IP_REPUTATION = 'ip_reputation'
 ACTION_ID_EMAIL_VALIDATION = 'email_validation'
+ACTION_ID_PHONE_VALIDATION = 'phone_validation'
+ACTION_ID_DARK_WEB_LEAK = 'darkwebleak'
 
 # Constants relating to '_get_error_message_from_exception'
 ERROR_CODE_MESSAGE = "Error code unavailable"
@@ -53,6 +57,19 @@ TIMEOUT_KEY = "'timeout' action parameter"
 STRICTNESS_KEY = "'strictness' action parameter"
 ABUSE_STRICTNESS_KEY = "'abuse_strictness' action parameter"
 TRANSACTION_STRICTNESS_KEY = "'transaction_strictness' action parameter"
+
+#Constants relating to 'phone_validation'
+PHONE_NUMBER_KEY = "'phone' action parameter"
+PHONE_NUMBER_FORMAT_ERROR_MESSAGE = "Please provide valid phone number"
+PHONE_REG = "^\+?[1-9]\d{1,14}$"
+
+#Constants relating to 'darkwebleak'
+EMAIL_REG = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}"
+EMAIL_FORMAT_ERROR_MESSAGE = "Please provide valid Email"
+VALUE_KEY = "'value' action parameter"
+
+
+
 
 # timeout
 IPQUALITYSCORE_DEFAULT_TIMEOUT = 30
