@@ -12,7 +12,7 @@
     "product_vendor": "IPQualityScore",
     "product_name": "IPQualityScore",
     "product_version_regex": ".*",
-    "min_phantom_version": "6.1.1",
+    "min_phantom_version": "6.3.0",
     "python_version": "3",
     "fips_compliant": false,
     "latest_tested_versions": [
@@ -1106,7 +1106,7 @@
                     "example_values": [
                         "api request completed"
                     ],
-                    "column_order": 3
+                    "column_order": 5
                 },
                 {
                     "column_name": "Success",
@@ -1116,7 +1116,7 @@
                         true,
                         false
                     ],
-                    "column_order": 5
+                    "column_order": 6
                 },
                 {
                     "column_name": "Formatted",
@@ -1125,7 +1125,7 @@
                     "example_values": [
                         "+918886686866"
                     ],
-                    "column_order": 6
+                    "column_order": 7
                 },
                 {
                     "column_name": "Local Format",
@@ -1134,7 +1134,7 @@
                     "example_values": [
                         "088866 86866"
                     ],
-                    "column_order": 7
+                    "column_order": 8
                 },
                 {
                     "column_name": "Valid",
@@ -1143,7 +1143,7 @@
                     "example_values": [
                         true
                     ],
-                    "column_order": 8
+                    "column_order": 9
                 },
                 {
                     "column_name": "Fraud Score",
@@ -1152,7 +1152,7 @@
                     "example_values": [
                         0
                     ],
-                    "column_order": 9
+                    "column_order": 10
                 },
                 {
                     "column_name": "Recent Abuse",
@@ -1161,7 +1161,7 @@
                     "example_values": [
                         false
                     ],
-                    "column_order": 10
+                    "column_order": 11
                 },
                 {
                     "column_name": "VOIP",
@@ -1170,7 +1170,7 @@
                     "example_values": [
                         false
                     ],
-                    "column_order": 11
+                    "column_order": 12
                 },
                 {
                     "column_name": "Prepaid",
@@ -1179,7 +1179,7 @@
                     "example_values": [
                         false
                     ],
-                    "column_order": 12
+                    "column_order": 13
                 },
                 {
                     "column_name": "Risky",
@@ -1188,7 +1188,7 @@
                     "example_values": [
                         false
                     ],
-                    "column_order": 13
+                    "column_order": 14
                 },
                 {
                     "column_name": "Active",
@@ -1197,7 +1197,7 @@
                     "example_values": [
                         true
                     ],
-                    "column_order": 14
+                    "column_order": 15
                 },
                 {
                     "column_name": "Carrier",
@@ -1206,7 +1206,7 @@
                     "example_values": [
                         "Aircel"
                     ],
-                    "column_order": 15
+                    "column_order": 16
                 },
                 {
                     "column_name": "Line Type",
@@ -1215,7 +1215,7 @@
                     "example_values": [
                         "Wireless"
                     ],
-                    "column_order": 16
+                    "column_order": 17
                 },
                 {
                     "column_name": "Country",
@@ -1224,7 +1224,7 @@
                     "example_values": [
                         "IN"
                     ],
-                    "column_order": 17
+                    "column_order": 18
                 },
                 {
                     "column_name": "City",
@@ -1233,7 +1233,7 @@
                     "example_values": [
                         "Madhya Pradesh"
                     ],
-                    "column_order": 18
+                    "column_order": 19
                 },
                 {
                     "column_name": "Zip Code",
@@ -1242,7 +1242,7 @@
                     "example_values": [
                         "N/A"
                     ],
-                    "column_order": 19
+                    "column_order": 20
                 },
                 {
                     "column_name": "Region",
@@ -1251,7 +1251,7 @@
                     "example_values": [
                         "India"
                     ],
-                    "column_order": 20
+                    "column_order": 21
                 },
                 {
                     "column_name": "Dialing Code",
@@ -1260,7 +1260,7 @@
                     "example_values": [
                         91
                     ],
-                    "column_order": 21
+                    "column_order": 22
                 },
                 {
                     "column_name": "Active Status",
@@ -1269,7 +1269,7 @@
                     "example_values": [
                         "N/A"
                     ],
-                    "column_order": 22
+                    "column_order": 23
                 },
                 {
                     "column_name": "SMS Domain",
@@ -1278,7 +1278,7 @@
                     "example_values": [
                         "aircel.co.in"
                     ],
-                    "column_order": 23
+                    "column_order": 24
                 },
                 {
                     "column_name": "Associated Email Addresses",
@@ -1287,7 +1287,7 @@
                     "example_values": [
                         "No associated emails found."
                     ],
-                    "column_order": 24
+                    "column_order": 25
                 },
                 {
                     "column_name": "Associated Email Addresses",
@@ -1296,7 +1296,7 @@
                     "example_values": [
                         "xuz@test.com"
                     ],
-                    "column_order": 25
+                    "column_order": 26
                 },
                 {
                     "column_name": "User  Activity",
@@ -1305,7 +1305,7 @@
                     "example_values": [
                         "Disabled for performance. Contact support for further assistance."
                     ],
-                    "column_order": 26
+                    "column_order": 27
                 },
                 {
                     "column_name": "MNC",
@@ -1314,7 +1314,7 @@
                     "example_values": [
                         "801"
                     ],
-                    "column_order": 27
+                    "column_order": 28
                 },
                 {
                     "column_name": "MCC",
@@ -1323,7 +1323,7 @@
                     "example_values": [
                         "405"
                     ],
-                    "column_order": 28
+                    "column_order": 29
                 },
                 {
                     "column_name": "Leaked",
@@ -1332,7 +1332,7 @@
                     "example_values": [
                         false
                     ],
-                    "column_order": 29
+                    "column_order": 30
                 },
                 {
                     "column_name": "Spammer",
@@ -1341,7 +1341,7 @@
                     "example_values": [
                         false
                     ],
-                    "column_order": 30
+                    "column_order": 31
                 },
                 {
                     "column_name": "Request ID",
@@ -1350,7 +1350,7 @@
                     "example_values": [
                         "TbA02W8E1S"
                     ],
-                    "column_order": 31
+                    "column_order": 32
                 },
                 {
                     "column_name": "Name",
@@ -1359,7 +1359,7 @@
                     "example_values": [
                         "N/A"
                     ],
-                    "column_order": 32
+                    "column_order": 33
                 },
                 {
                     "column_name": "Timezone",
@@ -1368,7 +1368,7 @@
                     "example_values": [
                         "Asia/Kolkata"
                     ],
-                    "column_order": 33
+                    "column_order": 34
                 },
                 {
                     "column_name": "Do Not Call",
@@ -1377,7 +1377,7 @@
                     "example_values": [
                         false
                     ],
-                    "column_order": 34
+                    "column_order": 35
                 },
                 {
                     "column_name": "Accurate Country Code",
@@ -1386,7 +1386,7 @@
                     "example_values": [
                         false
                     ],
-                    "column_order": 35
+                    "column_order": 36
                 },
                 {
                     "column_name": "SMS Email",
@@ -1395,7 +1395,7 @@
                     "example_values": [
                         "08886686866@aircel.co.in"
                     ],
-                    "column_order": 36
+                    "column_order": 37
                 },
                 {
                     "data_path": "summary.total_objects",
@@ -1522,7 +1522,7 @@
                         true,
                         false
                     ],
-                    "column_order": 4
+                    "column_order": 7
                 },
                 {
                     "column_name": "First Seen",
@@ -1531,7 +1531,7 @@
                     "example_values": [
                         "2 years ago"
                     ],
-                    "column_order": 5
+                    "column_order": 8
                 },
                 {
                     "column_name": "Plain Text Password",
@@ -1541,7 +1541,7 @@
                         true,
                         false
                     ],
-                    "column_order": 6
+                    "column_order": 9
                 },
                 {
                     "column_name": "Request ID",
@@ -1550,7 +1550,7 @@
                     "example_values": [
                         "CosqSQLZsx"
                     ],
-                    "column_order": 7
+                    "column_order": 10
                 },
                 {
                     "data_path": "action_result.message",
