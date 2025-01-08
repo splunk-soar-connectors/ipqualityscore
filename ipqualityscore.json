@@ -5,7 +5,7 @@
     "publisher": "IPQualityScore",
     "package_name": "phantom_ipqualityscore",
     "type": "investigative",
-    "license": "Copyright (c) 2021-2023 IPQualityScore.com",
+    "license": "Copyright (c) 2021-2025 IPQualityScore.com",
     "main_module": "ipqualityscore_connector.py",
     "app_version": "1.2.0",
     "utctime_updated": "2022-01-07T22:31:24.000000Z",
@@ -28,7 +28,7 @@
             "required": true
         }
     },
-   "actions": [
+    "actions": [
         {
             "action": "test connectivity",
             "description": "Validates the connectivity by querying IPQualityScore",
@@ -55,50 +55,32 @@
                     "contains": [
                         "email"
                     ],
-                    "order": 0,
-                    "name": "email",
-                    "id": 1,
-                    "param_name": "email"
+                    "order": 0
                 },
                 "fast": {
                     "description": "Enables or disables SMTP check with the mail service provider",
                     "data_type": "boolean",
-                    "order": 1,
-                    "name": "fast",
-                    "id": 2,
-                    "param_name": "fast"
+                    "order": 1
                 },
                 "suggest_domain": {
                     "description": "Force analyze if the email address's domain has a typo and should be corrected to a popular mail service",
                     "data_type": "boolean",
-                    "order": 2,
-                    "name": "suggest_domain",
-                    "id": 3,
-                    "param_name": "suggest_domain"
+                    "order": 2
                 },
                 "timeout": {
                     "description": "Maximum number of seconds to wait for a reply from a mail service provider",
                     "data_type": "numeric",
-                    "order": 3,
-                    "name": "timeout",
-                    "id": 4,
-                    "param_name": "timeout"
+                    "order": 3
                 },
                 "strictness": {
                     "description": "Sets how strictly spam traps and honeypots are detected by system (Possible Values: 0, 1 and 2)",
                     "data_type": "numeric",
-                    "order": 4,
-                    "name": "strictness",
-                    "id": 5,
-                    "param_name": "strictness"
+                    "order": 4
                 },
                 "abuse_strictness": {
                     "description": "Set the strictness level for machine learning pattern recognition of abusive email addresses",
                     "data_type": "numeric",
-                    "order": 5,
-                    "name": "abuse_strictness",
-                    "id": 6,
-                    "param_name": "abuse_strictness"
+                    "order": 5
                 }
             },
             "output": [
@@ -444,37 +426,18 @@
                         "url",
                         "domain"
                     ],
-                    "value_list": [],
-                    "default": "",
-                    "order": 0,
-                    "name": "url",
-                    "id": 1,
-                    "param_name": "url"
+                    "order": 0
                 },
                 "strictness": {
                     "description": "How strict should we scan this URL? (Possible Values: 0, 1 and 2)",
                     "data_type": "numeric",
-                    "required": false,
-                    "primary": false,
-                    "contains": [],
-                    "value_list": [],
-                    "default": "",
-                    "order": 1,
-                    "name": "strictness",
-                    "id": 2,
-                    "param_name": "strictness"
+                    "order": 1
                 },
                 "fast": {
-                    "description": "The API will provide quicker response times using lighter checks and analysis when enabled. This setting defaults to \"false\".",
+                    "description": "The API will provide quicker response times using lighter checks and analysis when enabled. This setting defaults to \"false\"",
                     "data_type": "boolean",
-                    "required": false,
-                    "primary": false,
-                    "contains": [],
                     "default": false,
-                    "order": 2,
-                    "name": "fast",
-                    "id": 3,
-                    "param_name": "fast"
+                    "order": 2
                 }
             },
             "output": [
@@ -485,28 +448,30 @@
                         "url",
                         "domain"
                     ],
-                    "column_name": "url",
+                    "column_name": "URL",
                     "column_order": 0
                 },
                 {
                     "data_path": "action_result.parameter.strictness",
                     "data_type": "numeric",
-                    "contains": [],
-                    "column_name": "strictness",
+                    "column_name": "Strictness",
                     "column_order": 1
                 },
                 {
                     "data_path": "action_result.parameter.fast",
                     "data_type": "boolean",
-                    "contains": [],
-                    "column_name": "fast",
+                    "column_name": "Fast",
                     "column_order": 2
                 },
                 {
                     "data_path": "action_result.status",
                     "data_type": "string",
-                    "column_name": "status",
-                    "column_order": 3
+                    "column_name": "Status",
+                    "column_order": 3,
+                    "example_values": [
+                        "success",
+                        "failed"
+                    ]
                 },
                 {
                     "data_path": "action_result.message",
@@ -542,74 +507,47 @@
                     "description": "IP to query for reputation information",
                     "data_type": "string",
                     "primary": true,
-                    "order": 0,
-                    "name": "ip",
-                    "id": 1,
-                    "param_name": "ip"
+                    "order": 0
                 },
                 "strictness": {
                     "description": "How in depth (strict) do you want this query to be? (Possible Values: 0, 1 and 2)",
                     "data_type": "numeric",
-                    "order": 1,
-                    "name": "strictness",
-                    "id": 2,
-                    "param_name": "strictness"
+                    "order": 1
                 },
                 "user_agent": {
                     "description": "Additional checks against bots",
                     "data_type": "string",
-                    "order": 2,
-                    "name": "user_agent",
-                    "id": 3,
-                    "param_name": "user_agent"
+                    "order": 2
                 },
                 "user_language": {
                     "description": "Additional risk evaluation",
                     "data_type": "string",
-                    "order": 3,
-                    "name": "user_language",
-                    "id": 4,
-                    "param_name": "user_language"
+                    "order": 3
                 },
                 "fast": {
                     "description": "Certain forensic checks are skipped",
                     "data_type": "boolean",
-                    "order": 4,
-                    "name": "fast",
-                    "id": 5,
-                    "param_name": "fast"
+                    "order": 4
                 },
                 "mobile": {
                     "description": "Specifies if this lookup should be treated as a mobile device",
                     "data_type": "boolean",
-                    "order": 5,
-                    "name": "mobile",
-                    "id": 6,
-                    "param_name": "mobile"
+                    "order": 5
                 },
                 "allow_public_access_points": {
                     "description": "Specifies if this lookup should be treated as a mobile device",
                     "data_type": "boolean",
-                    "order": 6,
-                    "name": "allow_public_access_points",
-                    "id": 7,
-                    "param_name": "allow_public_access_points"
+                    "order": 6
                 },
                 "lighter_penalties": {
                     "description": "Enable this setting to lower detection rates and Fraud Scores for mixed quality IP addresses",
                     "data_type": "boolean",
-                    "order": 7,
-                    "name": "lighter_penalties",
-                    "id": 8,
-                    "param_name": "lighter_penalties"
+                    "order": 7
                 },
                 "transaction_strictness": {
                     "description": "Adjusts the weights for penalties applied due to irregularities",
                     "data_type": "numeric",
-                    "order": 8,
-                    "name": "transaction_strictness",
-                    "id": 9,
-                    "param_name": "transaction_strictness"
+                    "order": 8
                 }
             },
             "output": [
@@ -762,7 +700,7 @@
                     "data_path": "action_result.data.*.organization",
                     "data_type": "string",
                     "example_values": [
-                        "splunk.com"
+                        "example.com"
                     ],
                     "column_order": 20
                 },
@@ -1026,38 +964,17 @@
                         "phone number",
                         "phone"
                     ],
-                    "value_list": [],
-                    "default": "",
-                    "order": 0,
-                    "name": "phone",
-                    "id": 1,
-                    "param_name": "phone"
+                    "order": 0
                 },
                 "strictness": {
                     "description": "How in depth (strict) do you want this reputation check to be? Stricter checks may provide a higher false-positive rate. We recommend starting at \"0\", the lowest strictness setting, and increasing to \"1\" or \"2\" depending on your levels of fraud",
                     "data_type": "numeric",
-                    "required": false,
-                    "primary": false,
-                    "contains": [],
-                    "value_list": [],
-                    "default": "",
-                    "order": 1,
-                    "name": "strictness",
-                    "id": 2,
-                    "param_name": "strictness"
+                    "order": 1
                 },
                 "country": {
                     "description": "You can optionally provide us with the default country or countries(comma separated) this phone number is suspected to be associated with. Our system will prefer to use a country on this list for verification or will require a country to be specified in the event the phone number is less than 10 digits",
                     "data_type": "string",
-                    "required": false,
-                    "primary": false,
-                    "contains": [],
-                    "value_list": [],
-                    "default": "",
-                    "order": 2,
-                    "name": "country",
-                    "id": 3,
-                    "param_name": "country"
+                    "order": 2
                 }
             },
             "output": [
@@ -1068,28 +985,30 @@
                         "phone number",
                         "phone"
                     ],
-                    "column_name": "phone",
+                    "column_name": "Phone",
                     "column_order": 0
                 },
                 {
                     "data_path": "action_result.parameter.strictness",
                     "data_type": "numeric",
-                    "contains": [],
-                    "column_name": "strictness",
+                    "column_name": "Strictness",
                     "column_order": 1
                 },
                 {
                     "data_path": "action_result.parameter.country",
                     "data_type": "string",
-                    "contains": [],
-                    "column_name": "country",
+                    "column_name": "Country",
                     "column_order": 2
                 },
                 {
                     "data_path": "action_result.status",
                     "data_type": "string",
-                    "column_name": "status",
-                    "column_order": 3
+                    "column_name": "Status",
+                    "column_order": 3,
+                    "example_values": [
+                        "success",
+                        "failed"
+                    ]
                 },
                 {
                     "column_name": "Message",
@@ -1429,53 +1348,42 @@
                     "description": "Type of data you are submitting",
                     "data_type": "string",
                     "required": true,
-                    "primary": false,
-                    "contains": [],
                     "value_list": [
                         "email",
                         "password",
                         "username"
                     ],
-                    "default": "",
-                    "order": 0,
-                    "name": "type",
-                    "id": 1,
-                    "param_name": "type"
+                    "order": 0
                 },
                 "value": {
                     "description": "Indicator Value of the type",
                     "data_type": "string",
                     "required": true,
-                    "primary": false,
-                    "contains": [],
-                    "value_list": [],
-                    "default": "",
-                    "order": 1,
-                    "name": "value",
-                    "id": 2,
-                    "param_name": "value"
+                    "order": 1
                 }
             },
             "output": [
                 {
                     "data_path": "action_result.parameter.type",
                     "data_type": "string",
-                    "contains": [],
-                    "column_name": "type",
+                    "column_name": "Type",
                     "column_order": 0
                 },
                 {
                     "data_path": "action_result.parameter.value",
                     "data_type": "string",
-                    "contains": [],
-                    "column_name": "value",
+                    "column_name": "Value",
                     "column_order": 1
                 },
                 {
                     "data_path": "action_result.status",
                     "data_type": "string",
-                    "column_name": "status",
-                    "column_order": 2
+                    "column_name": "Status",
+                    "column_order": 2,
+                    "example_values": [
+                        "success",
+                        "failed"
+                    ]
                 },
                 {
                     "column_name": "Message",
@@ -1574,56 +1482,16 @@
     "pip_dependencies": {
         "wheel": [
             {
-                "module": "certifi",
-                "input_file": "wheels/shared/certifi-2021.10.8-py2.py3-none-any.whl"
-            },
-            {
-                "module": "chardet",
-                "input_file": "wheels/shared/chardet-3.0.4-py2.py3-none-any.whl"
-            },
-            {
-                "module": "idna",
-                "input_file": "wheels/shared/idna-2.10-py2.py3-none-any.whl"
-            },
-            {
-                "module": "requests",
-                "input_file": "wheels/shared/requests-2.25.0-py2.py3-none-any.whl"
-            },
-            {
                 "module": "simplejson",
                 "input_file": "wheels/py36/simplejson-3.17.2-cp36-cp36m-manylinux2010_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
-            },
-            {
-                "module": "urllib3",
-                "input_file": "wheels/shared/urllib3-1.26.8-py2.py3-none-any.whl"
             }
         ]
     },
     "pip39_dependencies": {
         "wheel": [
             {
-                "module": "certifi",
-                "input_file": "wheels/py3/certifi-2023.5.7-py3-none-any.whl"
-            },
-            {
-                "module": "charset_normalizer",
-                "input_file": "wheels/py39/charset_normalizer-3.1.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
-            },
-            {
-                "module": "idna",
-                "input_file": "wheels/py3/idna-3.4-py3-none-any.whl"
-            },
-            {
-                "module": "requests",
-                "input_file": "wheels/py3/requests-2.31.0-py3-none-any.whl"
-            },
-            {
                 "module": "simplejson",
                 "input_file": "wheels/py39/simplejson-3.17.2-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
-            },
-            {
-                "module": "urllib3",
-                "input_file": "wheels/py3/urllib3-2.0.2-py3-none-any.whl"
             }
         ]
     }

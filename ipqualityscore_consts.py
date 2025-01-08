@@ -1,6 +1,6 @@
 # File: ipqualityscore_consts.py
 #
-# Copyright (c) 2021-2023 IPQualityScore.com
+# Copyright (c) 2021-2025 IPQualityScore.com
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,21 +16,11 @@
 IPQUALITYSCORE_DOMAIN = "https://ipqualityscore.com"
 
 IPQUALITYSCORE_API_TEST = "https://ipqualityscore.com/api/json/ip/{apikey}/8.8.8.8"
-IPQUALITYSCORE_API_URL_CHECKER = (
-    "https://ipqualityscore.com/api/json/url/{apikey}/{url}"
-)
-IPQUALITYSCORE_API_IP_REPUTATION = (
-    "https://ipqualityscore.com/api/json/ip/{apikey}/{ip}"
-)
-IPQUALITYSCORE_API_EMAIL_VALIDATION = (
-    "https://ipqualityscore.com/api/json/email/{apikey}/{email}"
-)
-IPQUALITYSCORE_API_PHONE_VALIDATION = (
-    "https://ipqualityscore.com/api/json/phone/{apikey}/{phone}"
-)
-IPQUALITYSCORE_API_DARKWEBLEAK = (
-    "https://ipqualityscore.com/api/json/leaked/{type}/{apikey}/{data}"
-)
+IPQUALITYSCORE_API_URL_CHECKER = "https://ipqualityscore.com/api/json/url/{apikey}/{url}"
+IPQUALITYSCORE_API_IP_REPUTATION = "https://ipqualityscore.com/api/json/ip/{apikey}/{ip}"
+IPQUALITYSCORE_API_EMAIL_VALIDATION = "https://ipqualityscore.com/api/json/email/{apikey}/{email}"
+IPQUALITYSCORE_API_PHONE_VALIDATION = "https://ipqualityscore.com/api/json/phone/{apikey}/{phone}"
+IPQUALITYSCORE_API_DARKWEBLEAK = "https://ipqualityscore.com/api/json/leaked/{type}/{apikey}/{data}"
 
 IPQUALITYSCORE_APP_KEY = "app_key"
 IPQUALITYSCORE_MESSAGE_QUERY_URL = "Querying URL: {query_url}"
@@ -62,9 +52,7 @@ PARSE_ERROR_MESSAGE = "Unable to parse the error message. Please check the asset
 
 # Constants relating to '_validate_integer'
 VALID_INTEGER_MESSAGE = "Please provide a valid integer value in the {}"
-NON_NEGATIVE_INTEGER_MESSAGE = (
-    "Please provide a valid non-negative integer value in the {}"
-)
+NON_NEGATIVE_INTEGER_MESSAGE = "Please provide a valid non-negative integer value in the {}"
 TIMEOUT_KEY = "'timeout' action parameter"
 STRICTNESS_KEY = "'strictness' action parameter"
 ABUSE_STRICTNESS_KEY = "'abuse_strictness' action parameter"
@@ -73,10 +61,10 @@ TRANSACTION_STRICTNESS_KEY = "'transaction_strictness' action parameter"
 # Constants relating to 'phone_validation'
 PHONE_NUMBER_KEY = "'phone' action parameter"
 PHONE_NUMBER_FORMAT_ERROR_MESSAGE = "Please provide valid phone number"
-PHONE_REG = "^\+?[1-9]\d{1,14}$"
+PHONE_REG = r"^\+?[1-9]\d{1,14}$"
 
 # Constants relating to 'darkwebleak'
-EMAIL_REG = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}"
+EMAIL_REG = r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}"
 EMAIL_FORMAT_ERROR_MESSAGE = "Please provide valid Email"
 VALUE_KEY = "'value' action parameter"
 
