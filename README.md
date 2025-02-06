@@ -2,11 +2,11 @@
 # IPQualityScore
 
 Publisher: IPQualityScore  
-Connector Version: 1.1.0  
+Connector Version: 1.2.0  
 Product Vendor: IPQualityScore  
 Product Name: IPQualityScore  
 Product Version Supported (regex): ".\*"  
-Minimum Product Version: 5.5.0  
+Minimum Product Version: 6.3.0  
 
 This app implements IP, URL and Email investigative capabilities utilizing IPQualityScore
 
@@ -22,6 +22,8 @@ VARIABLE | REQUIRED | TYPE | DESCRIPTION
 [email validation](#action-email-validation) - Queries IPQualityScore's Email Validation API  
 [url checker](#action-url-checker) - Queries IPQualityScore's malicious URL scanner API  
 [ip reputation](#action-ip-reputation) - Queries IPQualityScore's Proxy and VPN detection API  
+[phone validation](#action-phone-validation) - Queries IPQualityScore's Phone Validation API  
+[dark web leak](#action-dark-web-leak) - Queries IPQualityScore's Dark Web Leak API  
 
 ## action: 'test connectivity'
 Validates the connectivity by querying IPQualityScore
@@ -103,38 +105,20 @@ If URL information is unavailable in IPQualityScore, only 'url' and 'in_database
 #### Action Parameters
 PARAMETER | REQUIRED | DESCRIPTION | TYPE | CONTAINS
 --------- | -------- | ----------- | ---- | --------
-**url** |  required  | URL to query for reputation information | string |  `url` 
+**url** |  required  | URL to query for reputation information | string |  `url`  `domain` 
 **strictness** |  optional  | How strict should we scan this URL? (Possible Values: 0, 1 and 2) | numeric | 
+**fast** |  optional  | The API will provide quicker response times using lighter checks and analysis when enabled. This setting defaults to "false" | boolean | 
 
 #### Action Output
 DATA PATH | TYPE | CONTAINS | EXAMPLE VALUES
 --------- | ---- | -------- | --------------
-action_result.parameter.strictness | numeric |  |   2 
-action_result.parameter.url | string |  `url`  |   http://www.splunk.com 
-action_result.data.\*.message | string |  |   Failure. 
-action_result.data.\*.success | boolean |  |   False  True 
-action_result.data.\*.unsafe | boolean |  |   True  False 
-action_result.data.\*.domain | string |  |   splunk.com 
-action_result.data.\*.ip_address | string |  `ip`  |   8.8.8.8 
-action_result.data.\*.server | string |  |   gws 
-action_result.data.\*.content_type | string |  |   text/html 
-action_result.data.\*.status_code | numeric |  |   200 
-action_result.data.\*.page_size | numeric |  |   100 
-action_result.data.\*.domain_rank | numeric |  |   245 
-action_result.data.\*.dns_valid | boolean |  |   True  False 
-action_result.data.\*.parking | boolean |  |   True  False 
-action_result.data.\*.spamming | boolean |  |   True  False 
-action_result.data.\*.malware | boolean |  |   True  False 
-action_result.data.\*.phishing | boolean |  |   True  False 
-action_result.data.\*.suspicious | boolean |  |   True  False 
-action_result.data.\*.risk_score | numeric |  |   3 
-action_result.data.\*.request_id | string |  |   abc123 
+action_result.parameter.url | string |  `url`  `domain`  |  
+action_result.parameter.strictness | numeric |  |  
+action_result.parameter.fast | boolean |  |  
 action_result.status | string |  |   success  failed 
-action_result.summary.Message | string |  |   failure 
-action_result.summary.Status_Code | numeric |  |   400 
-action_result.message | string |  |   api request completed 
-summary.total_objects | numeric |  |   1 
-summary.total_objects_successful | numeric |  |   1   
+action_result.message | string |  |  
+summary.total_objects | numeric |  |  
+summary.total_objects_successful | numeric |  |    
 
 ## action: 'ip reputation'
 Queries IPQualityScore's Proxy and VPN detection API
@@ -176,7 +160,7 @@ action_result.data.\*.country_code | string |  |   us
 action_result.data.\*.city | string |  |   atlanta 
 action_result.data.\*.region | string |  |   northwest 
 action_result.data.\*.ISP | string |  |   comcast 
-action_result.data.\*.organization | string |  |   splunk.com 
+action_result.data.\*.organization | string |  |   example.com 
 action_result.data.\*.ASN | numeric |  |   1231 
 action_result.data.\*.latitude | numeric |  |   245 
 action_result.data.\*.longitude | numeric |  |   1213 
@@ -202,4 +186,95 @@ action_result.summary.Message | string |  |   failure
 action_result.summary.Status_Code | numeric |  |   400 
 action_result.message | string |  |   api request completed 
 summary.total_objects | numeric |  |   1 
-summary.total_objects_successful | numeric |  |   1 
+summary.total_objects_successful | numeric |  |   1   
+
+## action: 'phone validation'
+Queries IPQualityScore's Phone Validation API
+
+Type: **investigate**  
+Read only: **True**
+
+The IPQS Phone Number Validation API enables you to quickly analyze phone numbers to verify their risk score, country of origin, carrier, validity, owner information, and line connection status. This enables you to verify users, improve chargeback defense, and detect fraudulent activity in real-time. The IPQS Phone Number Validation API can research landline and cellular numbers in over 150 countries to identify invalid phone numbers or malicious users.
+
+#### Action Parameters
+PARAMETER | REQUIRED | DESCRIPTION | TYPE | CONTAINS
+--------- | -------- | ----------- | ---- | --------
+**phone** |  required  | Phone Number you want to fetch reputation data | numeric |  `phone number`  `phone` 
+**strictness** |  optional  | How in depth (strict) do you want this reputation check to be? Stricter checks may provide a higher false-positive rate. We recommend starting at "0", the lowest strictness setting, and increasing to "1" or "2" depending on your levels of fraud | numeric | 
+**country** |  optional  | You can optionally provide us with the default country or countries(comma separated) this phone number is suspected to be associated with. Our system will prefer to use a country on this list for verification or will require a country to be specified in the event the phone number is less than 10 digits | string | 
+
+#### Action Output
+DATA PATH | TYPE | CONTAINS | EXAMPLE VALUES
+--------- | ---- | -------- | --------------
+action_result.parameter.phone | numeric |  `phone number`  `phone`  |  
+action_result.parameter.strictness | numeric |  |  
+action_result.parameter.country | string |  |  
+action_result.status | string |  |   success  failed 
+action_result.data.\*.message | string |  |   Phone is valid. 
+action_result.message | string |  |   api request completed 
+action_result.data.\*.success | boolean |  |   True  False 
+action_result.data.\*.formatted | string |  |   +918886686866 
+action_result.data.\*.local_format | string |  |   088866 86866 
+action_result.data.\*.valid | boolean |  |   True 
+action_result.data.\*.fraud_score | numeric |  |   0 
+action_result.data.\*.recent_abuse | boolean |  |   False 
+action_result.data.\*.VOIP | boolean |  |   False 
+action_result.data.\*.prepaid | boolean |  |   False 
+action_result.data.\*.risky | boolean |  |   False 
+action_result.data.\*.active | boolean |  |   True 
+action_result.data.\*.carrier | string |  |   Aircel 
+action_result.data.\*.line_type | string |  |   Wireless 
+action_result.data.\*.country | string |  |   IN 
+action_result.data.\*.city | string |  |   Madhya Pradesh 
+action_result.data.\*.zip_code | string |  |   N/A 
+action_result.data.\*.region | string |  |   India 
+action_result.data.\*.dialing_code | numeric |  |   91 
+action_result.data.\*.active_status | string |  |   N/A 
+action_result.data.\*.sms_domain | string |  |   aircel.co.in 
+action_result.data.\*.associated_email_addresses.status | string |  |   No associated emails found. 
+action_result.data.\*.associated_email_addresses.emails | string |  |   xuz@test.com 
+action_result.data.\*.user_activity | string |  |   Disabled for performance. Contact support for further assistance. 
+action_result.data.\*.mnc | string |  |   801 
+action_result.data.\*.mcc | string |  |   405 
+action_result.data.\*.leaked | boolean |  |   False 
+action_result.data.\*.spammer | boolean |  |   False 
+action_result.data.\*.request_id | string |  |   TbA02W8E1S 
+action_result.data.\*.name | string |  |   N/A 
+action_result.data.\*.timezone | string |  |   Asia/Kolkata 
+action_result.data.\*.do_not_call | boolean |  |   False 
+action_result.data.\*.accurate_country_code | boolean |  |   False 
+action_result.data.\*.sms_email | string |  |   08886686866@aircel.co.in 
+summary.total_objects | numeric |  |   1 
+summary.total_objects_successful | numeric |  |   1   
+
+## action: 'dark web leak'
+Queries IPQualityScore's Dark Web Leak API
+
+Type: **investigate**  
+Read only: **True**
+
+Use the leaked data API to search through a wide collection of breached, stolen, and leaked databases from popular websites that have recently suffered data breaches. Look up email addresses, phone numbers, usernames, or passwords. Perform on-demand leaked data searches using our dark web data API.
+
+#### Action Parameters
+PARAMETER | REQUIRED | DESCRIPTION | TYPE | CONTAINS
+--------- | -------- | ----------- | ---- | --------
+**type** |  required  | Type of data you are submitting | string | 
+**value** |  required  | Indicator Value of the type | string | 
+
+#### Action Output
+DATA PATH | TYPE | CONTAINS | EXAMPLE VALUES
+--------- | ---- | -------- | --------------
+action_result.parameter.type | string |  |  
+action_result.parameter.value | string |  |  
+action_result.status | string |  |   success  failed 
+action_result.data.\*.message | string |  |   Success 
+action_result.data.\*.success | boolean |  |   True  False 
+action_result.data.\*.request_hash | string |  |   4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161 
+action_result.data.\*.source | string |  |   Exploit Antipublic 
+action_result.data.\*.exposed | boolean |  |   True  False 
+action_result.data.\*.first_seen.human | string |  |   2 years ago 
+action_result.data.\*.plain_text_password | boolean |  |   True  False 
+action_result.data.\*.request_id | string |  |   CosqSQLZsx 
+action_result.message | string |  |  
+summary.total_objects | numeric |  |  
+summary.total_objects_successful | numeric |  |  
