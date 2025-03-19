@@ -31,7 +31,7 @@ from ipqualityscore_consts import *
 
 class IpqualityscoreConnector(BaseConnector):
     def __init__(self):
-        super(IpqualityscoreConnector, self).__init__()
+        super().__init__()
 
     def handle_action(self, param):
         result = None
@@ -75,9 +75,9 @@ class IpqualityscoreConnector(BaseConnector):
 
         try:
             if error_code in ERROR_CODE_MESSAGE:
-                error_text = "Error Message: {0}".format(error_message)
+                error_text = f"Error Message: {error_message}"
             else:
-                error_text = "Error Code: {0}. Error Message: {1}".format(error_code, error_message)
+                error_text = f"Error Code: {error_code}. Error Message: {error_message}"
         except:
             self.debug_print(PARSE_ERROR_MESSAGE)
             error_text = PARSE_ERROR_MESSAGE
@@ -126,12 +126,8 @@ class IpqualityscoreConnector(BaseConnector):
             # python.requests.best-practice.use-timeout.use-timeout
         except Exception as e:
             err = self._get_error_message_from_exception(e)
-            self.debug_print("test_asset_connectivity: {}".format(err))
-            err_message = "{}. {}. Error Occurred: {}".format(
-                IPQUALITYSCORE_ERROR_CONNECTIVITY_TEST,
-                IPQUALITYSCORE_MESSAGE_CHECK_CONNECTIVITY,
-                err,
-            )
+            self.debug_print(f"test_asset_connectivity: {err}")
+            err_message = f"{IPQUALITYSCORE_ERROR_CONNECTIVITY_TEST}. {IPQUALITYSCORE_MESSAGE_CHECK_CONNECTIVITY}. Error Occurred: {err}"
             return self.set_status(phantom.APP_ERROR, err_message)
 
         if response.status_code == 509:
@@ -140,10 +136,7 @@ class IpqualityscoreConnector(BaseConnector):
             return self.set_status(phantom.APP_ERROR)
         if response.status_code != 200:
             self.save_progress(
-                "{}. {}".format(
-                    IPQUALITYSCORE_SERVER_RETURNED_ERROR_CODE.format(code=response.status_code),
-                    IPQUALITYSCORE_MESSAGE_CHECK_CONNECTIVITY,
-                )
+                f"{IPQUALITYSCORE_SERVER_RETURNED_ERROR_CODE.format(code=response.status_code)}. {IPQUALITYSCORE_MESSAGE_CHECK_CONNECTIVITY}"
             )
             self.save_progress(IPQUALITYSCORE_ERROR_CONNECTIVITY_TEST)
             return self.set_status(phantom.APP_ERROR)
@@ -152,7 +145,7 @@ class IpqualityscoreConnector(BaseConnector):
             result = response.json()
         except Exception as e:
             err = self._get_error_message_from_exception(e)
-            self.debug_print("Response from server is not a valid JSON {}".format(err))
+            self.debug_print(f"Response from server is not a valid JSON {err}")
             self.save_progress("Response from server is not a valid JSON")
             self.save_progress(IPQUALITYSCORE_ERROR_CONNECTIVITY_TEST)
             return self.set_status(phantom.APP_ERROR)
@@ -198,8 +191,8 @@ class IpqualityscoreConnector(BaseConnector):
         }
         query_string = "&".join(f"{k}={v}" for k, v in optional_params.items() if v is not None)
         if query_string:
-            req_url = "{}?{}".format(req_url, query_string)
-        self.debug_print("req_url {}".format(req_url))
+            req_url = f"{req_url}?{query_string}"
+        self.debug_print(f"req_url {req_url}")
         return req_url
 
     def check_url(self, param):
@@ -218,14 +211,14 @@ class IpqualityscoreConnector(BaseConnector):
             query_res = requests.get(req_url)  # nosemgrep: python.requests.best-practice.use-timeout.use-timeout
         except Exception as e:
             err = self._get_error_message_from_exception(e)
-            self.debug_print("check_url: {}".format(err))
+            self.debug_print(f"check_url: {err}")
             return action_result.set_status(
                 phantom.APP_ERROR,
-                "{}{}".format(IPQUALITYSCORE_SERVER_CONNECTIVITY_ERROR, err),
+                f"{IPQUALITYSCORE_SERVER_CONNECTIVITY_ERROR}{err}",
             )
 
         action_result.add_debug_data({"response_text": query_res.text if query_res else ""})
-        self.debug_print("status_code {}".format(query_res.status_code))
+        self.debug_print(f"status_code {query_res.status_code}")
         if query_res.status_code == 509:
             return action_result.set_status(phantom.APP_ERROR, IPQUALITYSCORE_SERVER_ERROR_RATE_LIMIT)
         if query_res.status_code != 200:
@@ -237,7 +230,7 @@ class IpqualityscoreConnector(BaseConnector):
             result = query_res.json()
         except Exception as e:
             err = self._get_error_message_from_exception(e)
-            self.debug_print("Response from server is not a valid JSON {}".format(err))
+            self.debug_print(f"Response from server is not a valid JSON {err}")
             return action_result.set_status(phantom.APP_ERROR, "Response from server is not a valid JSON")
 
         if "status_code" in result:
@@ -264,7 +257,7 @@ class IpqualityscoreConnector(BaseConnector):
             summary.update(status_summary)
         except Exception as e:
             err = self._get_error_message_from_exception(e)
-            return action_result.set_status(phantom.APP_ERROR, "Error populating summary {}".format(err))
+            return action_result.set_status(phantom.APP_ERROR, f"Error populating summary {err}")
 
         action_result.add_data(status)
         return action_result.set_status(phantom.APP_SUCCESS)
@@ -293,14 +286,14 @@ class IpqualityscoreConnector(BaseConnector):
             query_res = requests.get(req_url)  # nosemgrep: python.requests.best-practice.use-timeout.use-timeout
         except Exception as e:
             err = self._get_error_message_from_exception(e)
-            self.debug_print("ip_reputation: {}".format(err))
+            self.debug_print(f"ip_reputation: {err}")
             return action_result.set_status(
                 phantom.APP_ERROR,
-                "{}{}".format(IPQUALITYSCORE_SERVER_CONNECTIVITY_ERROR, err),
+                f"{IPQUALITYSCORE_SERVER_CONNECTIVITY_ERROR}{err}",
             )
 
         action_result.add_debug_data({"response_text": query_res.text if query_res else ""})
-        self.debug_print("status_code {}".format(query_res.status_code))
+        self.debug_print(f"status_code {query_res.status_code}")
         if query_res.status_code == 509:
             return action_result.set_status(phantom.APP_ERROR, IPQUALITYSCORE_SERVER_ERROR_RATE_LIMIT)
         if query_res.status_code != 200:
@@ -312,7 +305,7 @@ class IpqualityscoreConnector(BaseConnector):
             result = query_res.json()
         except Exception as e:
             err = self._get_error_message_from_exception(e)
-            self.debug_print("Response from server is not a valid JSON {}".format(err))
+            self.debug_print(f"Response from server is not a valid JSON {err}")
             return action_result.set_status(phantom.APP_ERROR, "Response from server is not a valid JSON")
 
         if result.get("success"):
@@ -335,7 +328,7 @@ class IpqualityscoreConnector(BaseConnector):
             summary.update(status_summary)
         except Exception as e:
             err = self._get_error_message_from_exception(e)
-            return action_result.set_status(phantom.APP_ERROR, "Error populating summary {}".format(err))
+            return action_result.set_status(phantom.APP_ERROR, f"Error populating summary {err}")
 
         action_result.add_data(status)
         return action_result.set_status(phantom.APP_SUCCESS)
@@ -364,14 +357,14 @@ class IpqualityscoreConnector(BaseConnector):
             query_res = requests.get(req_url)  # nosemgrep: python.requests.best-practice.use-timeout.use-timeout
         except Exception as e:
             err = self._get_error_message_from_exception(e)
-            self.debug_print("ip_reputation: {}".format(err))
+            self.debug_print(f"ip_reputation: {err}")
             return action_result.set_status(
                 phantom.APP_ERROR,
-                "{}{}".format(IPQUALITYSCORE_SERVER_CONNECTIVITY_ERROR, err),
+                f"{IPQUALITYSCORE_SERVER_CONNECTIVITY_ERROR}{err}",
             )
 
         action_result.add_debug_data({"response_text": query_res.text if query_res else ""})
-        self.debug_print("status_code {}".format(query_res.status_code))
+        self.debug_print(f"status_code {query_res.status_code}")
         if query_res.status_code == 509:
             return action_result.set_status(phantom.APP_ERROR, IPQUALITYSCORE_SERVER_ERROR_RATE_LIMIT)
         if query_res.status_code != 200:
@@ -383,7 +376,7 @@ class IpqualityscoreConnector(BaseConnector):
             result = query_res.json()
         except Exception as e:
             err = self._get_error_message_from_exception(e)
-            self.debug_print("Response from server is not a valid JSON {}".format(err))
+            self.debug_print(f"Response from server is not a valid JSON {err}")
             return action_result.set_status(phantom.APP_ERROR, "Response from server is not a valid JSON")
 
         if result.get("success"):
@@ -403,7 +396,7 @@ class IpqualityscoreConnector(BaseConnector):
             summary.update(status_summary)
         except Exception as e:
             err = self._get_error_message_from_exception(e)
-            return action_result.set_status(phantom.APP_ERROR, "Error populating summary {}".format(err))
+            return action_result.set_status(phantom.APP_ERROR, f"Error populating summary {err}")
 
         action_result.add_data(status)
         return action_result.set_status(phantom.APP_SUCCESS)
@@ -424,14 +417,14 @@ class IpqualityscoreConnector(BaseConnector):
             query_res = requests.get(req_url)  # nosemgrep: python.requests.best-practice.use-timeout.use-timeout
         except Exception as e:
             err = self._get_error_message_from_exception(e)
-            self.debug_print("phone_validation: {}".format(err))
+            self.debug_print(f"phone_validation: {err}")
             return action_result.set_status(
                 phantom.APP_ERROR,
-                "{}{}".format(IPQUALITYSCORE_SERVER_CONNECTIVITY_ERROR, err),
+                f"{IPQUALITYSCORE_SERVER_CONNECTIVITY_ERROR}{err}",
             )
 
         action_result.add_debug_data({"response_text": query_res.text if query_res else ""})
-        self.debug_print("status_code {}".format(query_res.status_code))
+        self.debug_print(f"status_code {query_res.status_code}")
         if query_res.status_code == 509:
             return action_result.set_status(phantom.APP_ERROR, IPQUALITYSCORE_SERVER_ERROR_RATE_LIMIT)
         if query_res.status_code != 200:
@@ -443,7 +436,7 @@ class IpqualityscoreConnector(BaseConnector):
             result = query_res.json()
         except Exception as e:
             err = self._get_error_message_from_exception(e)
-            self.debug_print("Response from server is not a valid JSON {}".format(err))
+            self.debug_print(f"Response from server is not a valid JSON {err}")
             return action_result.set_status(phantom.APP_ERROR, "Response from server is not a valid JSON")
 
         if result.get("success"):
@@ -463,7 +456,7 @@ class IpqualityscoreConnector(BaseConnector):
             summary.update(status_summary)
         except Exception as e:
             err = self._get_error_message_from_exception(e)
-            return action_result.set_status(phantom.APP_ERROR, "Error populating summary {}".format(err))
+            return action_result.set_status(phantom.APP_ERROR, f"Error populating summary {err}")
 
         action_result.add_data(status)
         return action_result.set_status(phantom.APP_SUCCESS)
@@ -485,14 +478,14 @@ class IpqualityscoreConnector(BaseConnector):
             query_res = requests.get(req_url)  # nosemgrep: python.requests.best-practice.use-timeout.use-timeout
         except Exception as e:
             err = self._get_error_message_from_exception(e)
-            self.debug_print("darkwebleak_api: {}".format(err))
+            self.debug_print(f"darkwebleak_api: {err}")
             return action_result.set_status(
                 phantom.APP_ERROR,
-                "{}{}".format(IPQUALITYSCORE_SERVER_CONNECTIVITY_ERROR, err),
+                f"{IPQUALITYSCORE_SERVER_CONNECTIVITY_ERROR}{err}",
             )
 
         action_result.add_debug_data({"response_text": query_res.text if query_res else ""})
-        self.debug_print("status_code {}".format(query_res.status_code))
+        self.debug_print(f"status_code {query_res.status_code}")
         if query_res.status_code == 509:
             return action_result.set_status(phantom.APP_ERROR, IPQUALITYSCORE_SERVER_ERROR_RATE_LIMIT)
         if query_res.status_code != 200:
@@ -504,7 +497,7 @@ class IpqualityscoreConnector(BaseConnector):
             result = query_res.json()
         except Exception as e:
             err = self._get_error_message_from_exception(e)
-            self.debug_print("Response from server is not a valid JSON {}".format(err))
+            self.debug_print(f"Response from server is not a valid JSON {err}")
             return action_result.set_status(phantom.APP_ERROR, "Response from server is not a valid JSON")
 
         if result.get("success"):
@@ -524,7 +517,7 @@ class IpqualityscoreConnector(BaseConnector):
             summary.update(status_summary)
         except Exception as e:
             err = self._get_error_message_from_exception(e)
-            return action_result.set_status(phantom.APP_ERROR, "Error populating summary {}".format(err))
+            return action_result.set_status(phantom.APP_ERROR, f"Error populating summary {err}")
 
         action_result.add_data(status)
         return action_result.set_status(phantom.APP_SUCCESS)
