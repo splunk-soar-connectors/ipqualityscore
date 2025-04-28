@@ -1,7 +1,7 @@
 # IPQualityScore
 
 Publisher: IPQualityScore \
-Connector Version: 1.2.0 \
+Connector Version: 1.2.1 \
 Product Vendor: IPQualityScore \
 Product Name: IPQualityScore \
 Minimum Product Version: 6.3.0
