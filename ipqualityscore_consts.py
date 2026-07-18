@@ -15,14 +15,13 @@
 
 IPQUALITYSCORE_DOMAIN = "https://ipqualityscore.com"
 
-IPQUALITYSCORE_API_TEST = "https://ipqualityscore.com/api/json/ip/{apikey}/8.8.8.8"
-IPQUALITYSCORE_API_URL_CHECKER = "https://ipqualityscore.com/api/json/url/{apikey}/{url}"
-IPQUALITYSCORE_API_IP_REPUTATION = "https://ipqualityscore.com/api/json/ip/{apikey}/{ip}"
-IPQUALITYSCORE_API_EMAIL_VALIDATION = "https://ipqualityscore.com/api/json/email/{apikey}/{email}"
-IPQUALITYSCORE_API_PHONE_VALIDATION = "https://ipqualityscore.com/api/json/phone/{apikey}/{phone}"
-IPQUALITYSCORE_API_DARKWEBLEAK = "https://ipqualityscore.com/api/json/leaked/{type}/{apikey}/{data}"
+IPQUALITYSCORE_API_TEST = "https://ipqualityscore.com/api/json/ip/8.8.8.8"
+IPQUALITYSCORE_API_URL_CHECKER = "https://ipqualityscore.com/api/json/url/{url}"
+IPQUALITYSCORE_API_IP_REPUTATION = "https://ipqualityscore.com/api/json/ip/{ip}"
+IPQUALITYSCORE_API_EMAIL_VALIDATION = "https://ipqualityscore.com/api/json/email/{email}"
+IPQUALITYSCORE_API_PHONE_VALIDATION = "https://ipqualityscore.com/api/json/phone/{phone}"
+IPQUALITYSCORE_API_DARKWEBLEAK = "https://ipqualityscore.com/api/json/leaked/{type}/{data}"
 
-IPQUALITYSCORE_APP_KEY = "app_key"
 IPQUALITYSCORE_MESSAGE_QUERY_URL = "Querying URL: {query_url}"
 IPQUALITYSCORE_MESSAGE_CONNECTIVITY = "Polling IPQualityScore site ..."
 IPQUALITYSCORE_SERVICE_SUCCESS_MESSAGE = "IPQualityScore Service successfully executed."
