@@ -1,6 +1,6 @@
 # File: ipqualityscore_connector.py
 #
-# Copyright (c) 2021-2025 IPQualityScore.com
+# Copyright (c) 2021-2026 IPQualityScore.com
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -205,7 +205,9 @@ class IpqualityscoreConnector(BaseConnector):
         self.save_progress(IPQUALITYSCORE_MESSAGE_QUERY_URL, query_url=param["url"])
         try:
             req_url = self.create_req_url("url", param)
-            query_res = requests.get(req_url, headers=self._get_auth_headers())  # nosemgrep: python.requests.best-practice.use-timeout.use-timeout
+            query_res = requests.get(
+                req_url, headers=self._get_auth_headers()
+            )  # nosemgrep: python.requests.best-practice.use-timeout.use-timeout
         except Exception as e:
             err = self._get_error_message_from_exception(e)
             self.debug_print(f"check_url: {err}")
@@ -278,7 +280,9 @@ class IpqualityscoreConnector(BaseConnector):
         self.save_progress(IPQUALITYSCORE_MESSAGE_QUERY_URL, query_ip=param["ip"])
         try:
             req_url = self.create_req_url("ip", param)
-            query_res = requests.get(req_url, headers=self._get_auth_headers())  # nosemgrep: python.requests.best-practice.use-timeout.use-timeout
+            query_res = requests.get(
+                req_url, headers=self._get_auth_headers()
+            )  # nosemgrep: python.requests.best-practice.use-timeout.use-timeout
         except Exception as e:
             err = self._get_error_message_from_exception(e)
             self.debug_print(f"ip_reputation: {err}")
@@ -347,7 +351,9 @@ class IpqualityscoreConnector(BaseConnector):
         self.save_progress(IPQUALITYSCORE_MESSAGE_QUERY_URL, query_ip=param["email"])
         try:
             req_url = self.create_req_url("email", param)
-            query_res = requests.get(req_url, headers=self._get_auth_headers())  # nosemgrep: python.requests.best-practice.use-timeout.use-timeout
+            query_res = requests.get(
+                req_url, headers=self._get_auth_headers()
+            )  # nosemgrep: python.requests.best-practice.use-timeout.use-timeout
         except Exception as e:
             err = self._get_error_message_from_exception(e)
             self.debug_print(f"ip_reputation: {err}")
@@ -405,7 +411,9 @@ class IpqualityscoreConnector(BaseConnector):
         self.save_progress(IPQUALITYSCORE_MESSAGE_QUERY_URL, query_ip=param["phone"])
         try:
             req_url = self.create_req_url("phone", param)
-            query_res = requests.get(req_url, headers=self._get_auth_headers())  # nosemgrep: python.requests.best-practice.use-timeout.use-timeout
+            query_res = requests.get(
+                req_url, headers=self._get_auth_headers()
+            )  # nosemgrep: python.requests.best-practice.use-timeout.use-timeout
         except Exception as e:
             err = self._get_error_message_from_exception(e)
             self.debug_print(f"phone_validation: {err}")
@@ -464,7 +472,9 @@ class IpqualityscoreConnector(BaseConnector):
         self.save_progress(IPQUALITYSCORE_MESSAGE_QUERY_URL, query_ip=param["type"])
         try:
             req_url = self.create_req_url("darkwebleak", param)
-            query_res = requests.get(req_url, headers=self._get_auth_headers())  # nosemgrep: python.requests.best-practice.use-timeout.use-timeout
+            query_res = requests.get(
+                req_url, headers=self._get_auth_headers()
+            )  # nosemgrep: python.requests.best-practice.use-timeout.use-timeout
         except Exception as e:
             err = self._get_error_message_from_exception(e)
             self.debug_print(f"darkwebleak_api: {err}")
