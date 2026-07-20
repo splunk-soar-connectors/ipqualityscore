@@ -1,3 +1,1 @@
 **Unreleased**
-
-* Keep API keys out of request URLs and debug logs by using the IPQS-KEY header
