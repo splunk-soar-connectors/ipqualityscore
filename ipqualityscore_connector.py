@@ -1,6 +1,6 @@
 # File: ipqualityscore_connector.py
 #
-# Copyright (c) 2021-2025 IPQualityScore.com
+# Copyright (c) 2021-2026 IPQualityScore.com
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -118,11 +118,9 @@ class IpqualityscoreConnector(BaseConnector):
         return phantom.APP_SUCCESS, parameter
 
     def test_asset_connectivity(self):
-        config = self.get_config()
-        app_key = config["apikey"]
         self.save_progress(IPQUALITYSCORE_MESSAGE_CONNECTIVITY)
         try:
-            response = requests.get(IPQUALITYSCORE_API_TEST.format(apikey=app_key))  # nosemgrep
+            response = requests.get(IPQUALITYSCORE_API_TEST, headers=self._get_auth_headers())  # nosemgrep
             # python.requests.best-practice.use-timeout.use-timeout
         except Exception as e:
             err = self._get_error_message_from_exception(e)
@@ -157,18 +155,20 @@ class IpqualityscoreConnector(BaseConnector):
         self.save_progress(IPQUALITYSCORE_ERROR_CONNECTIVITY_TEST)
         return self.set_status(phantom.APP_ERROR)
 
-    def create_req_url(self, urltype, param, app_key):
+    def _get_auth_headers(self):
+        return {"IPQS-KEY": self.get_config()["apikey"]}
+
+    def create_req_url(self, urltype, param):
         if urltype == "url":
-            req_url = IPQUALITYSCORE_API_URL_CHECKER.format(apikey=app_key, url=urllib.parse.quote_plus(param["url"]))
+            req_url = IPQUALITYSCORE_API_URL_CHECKER.format(url=urllib.parse.quote_plus(param["url"]))
         elif urltype == "ip":
-            req_url = IPQUALITYSCORE_API_IP_REPUTATION.format(apikey=app_key, ip=param["ip"])
+            req_url = IPQUALITYSCORE_API_IP_REPUTATION.format(ip=param["ip"])
         elif urltype == "email":
-            req_url = IPQUALITYSCORE_API_EMAIL_VALIDATION.format(apikey=app_key, email=param["email"])
+            req_url = IPQUALITYSCORE_API_EMAIL_VALIDATION.format(email=param["email"])
         elif urltype == "phone":
-            req_url = IPQUALITYSCORE_API_PHONE_VALIDATION.format(apikey=app_key, phone=param["phone"])
+            req_url = IPQUALITYSCORE_API_PHONE_VALIDATION.format(phone=param["phone"])
         elif urltype == "darkwebleak":
             req_url = IPQUALITYSCORE_API_DARKWEBLEAK.format(
-                apikey=app_key,
                 type=param["type"],
                 data=urllib.parse.quote_plus(param["value"]),
             )
@@ -192,12 +192,9 @@ class IpqualityscoreConnector(BaseConnector):
         query_string = "&".join(f"{k}={v}" for k, v in optional_params.items() if v is not None)
         if query_string:
             req_url = f"{req_url}?{query_string}"
-        self.debug_print(f"req_url {req_url}")
         return req_url
 
     def check_url(self, param):
-        config = self.get_config()
-        app_key = config["apikey"]
         action_result = self.add_action_result(ActionResult(dict(param)))
         summary = action_result.update_summary({})
 
@@ -207,8 +204,10 @@ class IpqualityscoreConnector(BaseConnector):
 
         self.save_progress(IPQUALITYSCORE_MESSAGE_QUERY_URL, query_url=param["url"])
         try:
-            req_url = self.create_req_url("url", param, app_key)
-            query_res = requests.get(req_url)  # nosemgrep: python.requests.best-practice.use-timeout.use-timeout
+            req_url = self.create_req_url("url", param)
+            query_res = requests.get(
+                req_url, headers=self._get_auth_headers()
+            )  # nosemgrep: python.requests.best-practice.use-timeout.use-timeout
         except Exception as e:
             err = self._get_error_message_from_exception(e)
             self.debug_print(f"check_url: {err}")
@@ -263,8 +262,6 @@ class IpqualityscoreConnector(BaseConnector):
         return action_result.set_status(phantom.APP_SUCCESS)
 
     def ip_reputation(self, param):
-        config = self.get_config()
-        app_key = config["apikey"]
         action_result = self.add_action_result(ActionResult(dict(param)))
         summary = action_result.update_summary({})
 
@@ -282,8 +279,10 @@ class IpqualityscoreConnector(BaseConnector):
 
         self.save_progress(IPQUALITYSCORE_MESSAGE_QUERY_URL, query_ip=param["ip"])
         try:
-            req_url = self.create_req_url("ip", param, app_key)
-            query_res = requests.get(req_url)  # nosemgrep: python.requests.best-practice.use-timeout.use-timeout
+            req_url = self.create_req_url("ip", param)
+            query_res = requests.get(
+                req_url, headers=self._get_auth_headers()
+            )  # nosemgrep: python.requests.best-practice.use-timeout.use-timeout
         except Exception as e:
             err = self._get_error_message_from_exception(e)
             self.debug_print(f"ip_reputation: {err}")
@@ -334,8 +333,6 @@ class IpqualityscoreConnector(BaseConnector):
         return action_result.set_status(phantom.APP_SUCCESS)
 
     def email_validation(self, param):
-        config = self.get_config()
-        app_key = config["apikey"]
         action_result = self.add_action_result(ActionResult(dict(param)))
         summary = action_result.update_summary({})
 
@@ -353,8 +350,10 @@ class IpqualityscoreConnector(BaseConnector):
 
         self.save_progress(IPQUALITYSCORE_MESSAGE_QUERY_URL, query_ip=param["email"])
         try:
-            req_url = self.create_req_url("email", param, app_key)
-            query_res = requests.get(req_url)  # nosemgrep: python.requests.best-practice.use-timeout.use-timeout
+            req_url = self.create_req_url("email", param)
+            query_res = requests.get(
+                req_url, headers=self._get_auth_headers()
+            )  # nosemgrep: python.requests.best-practice.use-timeout.use-timeout
         except Exception as e:
             err = self._get_error_message_from_exception(e)
             self.debug_print(f"ip_reputation: {err}")
@@ -402,8 +401,6 @@ class IpqualityscoreConnector(BaseConnector):
         return action_result.set_status(phantom.APP_SUCCESS)
 
     def phone_validation(self, param):
-        config = self.get_config()
-        app_key = config["apikey"]
         action_result = self.add_action_result(ActionResult(dict(param)))
         summary = action_result.update_summary({})
 
@@ -413,8 +410,10 @@ class IpqualityscoreConnector(BaseConnector):
 
         self.save_progress(IPQUALITYSCORE_MESSAGE_QUERY_URL, query_ip=param["phone"])
         try:
-            req_url = self.create_req_url("phone", param, app_key)
-            query_res = requests.get(req_url)  # nosemgrep: python.requests.best-practice.use-timeout.use-timeout
+            req_url = self.create_req_url("phone", param)
+            query_res = requests.get(
+                req_url, headers=self._get_auth_headers()
+            )  # nosemgrep: python.requests.best-practice.use-timeout.use-timeout
         except Exception as e:
             err = self._get_error_message_from_exception(e)
             self.debug_print(f"phone_validation: {err}")
@@ -462,8 +461,6 @@ class IpqualityscoreConnector(BaseConnector):
         return action_result.set_status(phantom.APP_SUCCESS)
 
     def darkwebleak(self, param):
-        config = self.get_config()
-        app_key = config["apikey"]
         action_result = self.add_action_result(ActionResult(dict(param)))
         summary = action_result.update_summary({})
 
@@ -474,8 +471,10 @@ class IpqualityscoreConnector(BaseConnector):
 
         self.save_progress(IPQUALITYSCORE_MESSAGE_QUERY_URL, query_ip=param["type"])
         try:
-            req_url = self.create_req_url("darkwebleak", param, app_key)
-            query_res = requests.get(req_url)  # nosemgrep: python.requests.best-practice.use-timeout.use-timeout
+            req_url = self.create_req_url("darkwebleak", param)
+            query_res = requests.get(
+                req_url, headers=self._get_auth_headers()
+            )  # nosemgrep: python.requests.best-practice.use-timeout.use-timeout
         except Exception as e:
             err = self._get_error_message_from_exception(e)
             self.debug_print(f"darkwebleak_api: {err}")

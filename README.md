@@ -1,9 +1,9 @@
 # IPQualityScore
 
-Publisher: IPQualityScore \
-Connector Version: 1.2.1 \
-Product Vendor: IPQualityScore \
-Product Name: IPQualityScore \
+Publisher: IPQualityScore <br>
+Connector Version: 1.2.1 <br>
+Product Vendor: IPQualityScore <br>
+Product Name: IPQualityScore <br>
 Minimum Product Version: 6.3.0
 
 This app implements IP, URL and Email investigative capabilities utilizing IPQualityScore
@@ -18,18 +18,18 @@ VARIABLE | REQUIRED | TYPE | DESCRIPTION
 
 ### Supported Actions
 
-[test connectivity](#action-test-connectivity) - Validates the connectivity by querying IPQualityScore \
-[email validation](#action-email-validation) - Queries IPQualityScore's Email Validation API \
-[url checker](#action-url-checker) - Queries IPQualityScore's malicious URL scanner API \
-[ip reputation](#action-ip-reputation) - Queries IPQualityScore's Proxy and VPN detection API \
-[phone validation](#action-phone-validation) - Queries IPQualityScore's Phone Validation API \
+[test connectivity](#action-test-connectivity) - Validates the connectivity by querying IPQualityScore <br>
+[email validation](#action-email-validation) - Queries IPQualityScore's Email Validation API <br>
+[url checker](#action-url-checker) - Queries IPQualityScore's malicious URL scanner API <br>
+[ip reputation](#action-ip-reputation) - Queries IPQualityScore's Proxy and VPN detection API <br>
+[phone validation](#action-phone-validation) - Queries IPQualityScore's Phone Validation API <br>
 [dark web leak](#action-dark-web-leak) - Queries IPQualityScore's Dark Web Leak API
 
 ## action: 'test connectivity'
 
 Validates the connectivity by querying IPQualityScore
 
-Type: **test** \
+Type: **test** <br>
 Read only: **True**
 
 #### Action Parameters
@@ -44,7 +44,7 @@ No Output
 
 Queries IPQualityScore's Email Validation API
 
-Type: **investigate** \
+Type: **investigate** <br>
 Read only: **True**
 
 If email information is unavailable in IPQualityScore, only 'email' and 'message' property would be populated. The 'strictness' is an optional parameter to perform (higher number) or ignore (lower number) of additional intelligence checks. The possible values for 'strictness' are 0,1 and 2.
@@ -104,7 +104,7 @@ summary.total_objects_successful | numeric | | 1 |
 
 Queries IPQualityScore's malicious URL scanner API
 
-Type: **investigate** \
+Type: **investigate** <br>
 Read only: **True**
 
 If URL information is unavailable in IPQualityScore, only 'url' and 'in_database' property would be populated. The 'strictness' is an optional parameter to perform (higher number) or ignore (lower number) of additional intelligence checks. The possible values for 'strictness' are 0,1 and 2.
@@ -133,7 +133,7 @@ summary.total_objects_successful | numeric | | |
 
 Queries IPQualityScore's Proxy and VPN detection API
 
-Type: **investigate** \
+Type: **investigate** <br>
 Read only: **True**
 
 If URL information is unavailable in IPQualityScore, only 'message' and 'status_code' properties would be populated. The 'strictness' is an optional parameter to perform (higher number) or ignore (lower number) of additional intelligence checks. The possible values for 'strictness' are 0,1 and 2.
@@ -204,7 +204,7 @@ summary.total_objects_successful | numeric | | 1 |
 
 Queries IPQualityScore's Phone Validation API
 
-Type: **investigate** \
+Type: **investigate** <br>
 Read only: **True**
 
 The IPQS Phone Number Validation API enables you to quickly analyze phone numbers to verify their risk score, country of origin, carrier, validity, owner information, and line connection status. This enables you to verify users, improve chargeback defense, and detect fraudulent activity in real-time. The IPQS Phone Number Validation API can research landline and cellular numbers in over 150 countries to identify invalid phone numbers or malicious users.
@@ -266,7 +266,7 @@ summary.total_objects_successful | numeric | | 1 |
 
 Queries IPQualityScore's Dark Web Leak API
 
-Type: **investigate** \
+Type: **investigate** <br>
 Read only: **True**
 
 Use the leaked data API to search through a wide collection of breached, stolen, and leaked databases from popular websites that have recently suffered data breaches. Look up email addresses, phone numbers, usernames, or passwords. Perform on-demand leaked data searches using our dark web data API.
@@ -301,7 +301,7 @@ ______________________________________________________________________
 
 Auto-generated Splunk SOAR Connector documentation.
 
-Copyright 2025 Splunk Inc.
+Copyright 2026 Splunk Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
